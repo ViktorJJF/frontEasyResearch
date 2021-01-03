@@ -89,15 +89,33 @@
                   </v-dialog>
                 </v-col>
               </v-row>
+              <span class="font-weight-bold">Ordenar por</span
+              ><v-row>
+                <v-col cols="12" sm="6">
+                  <v-select
+                    outlined
+                    dense
+                    :items="headers"
+                    name="text"
+                  ></v-select>
+                </v-col>
+              </v-row>
             </v-container>
           </template>
           <template v-slot:[`item.action`]="{ item }">
-            <v-btn class="mr-3" small color="secondary" @click="editItem(item)"
-              >Editar</v-btn
+            <v-btn
+              class="mr-1 mb-1"
+              color="primary"
+              fab
+              small
+              dark
+              @click="editItem(item)"
             >
-            <v-btn small color="error" @click="deleteItem(item)"
-              >Eliminar</v-btn
-            >
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+            <v-btn color="error" fab small dark @click="deleteItem(item)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
           </template>
           <template v-slot:no-data>
             <v-alert type="error" :value="true">{{
@@ -163,21 +181,27 @@ export default {
     dialog: false,
     headers: [
       {
-        text: 'Nombre',
-        align: 'left',
-        sortable: true,
-        value: 'name',
-      },
-      {
-        text: 'Descripción',
+        text: 'Nombres',
         align: 'left',
         sortable: false,
-        value: 'description',
+        value: 'first_name',
+      },
+      {
+        text: 'Apellidos',
+        align: 'left',
+        sortable: false,
+        value: 'last_name',
+      },
+      {
+        text: 'Rol',
+        align: 'left',
+        sortable: false,
+        value: 'role',
       },
       {
         text: 'Agregado',
         align: 'left',
-        sortable: true,
+        sortable: false,
         value: 'createdAt',
       },
       { text: 'Acciones', value: 'action', sortable: false },

@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 export default {
   login(email, password) {
-    return axios.post("/api/login", { email, password });
+    return axios.post('/api/login', { email, password });
   },
   editUser(id, payload) {
     return axios.put(`/api/members/${id}`, payload);
@@ -10,6 +10,6 @@ export default {
     return axios.put(`/api/members/${id}/update-password`, { newPassword });
   },
   refreshToken() {
-    return axios.get("/api/token");
+    return axios.get('/api/token');
   },
 };

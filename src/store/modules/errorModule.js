@@ -1,8 +1,8 @@
 const namespaced = true;
 
 const getters = {
-  showErrorMessage: (state) => state.showErrorMessage,
-  errorMessage: (state) => state.errorMessage,
+  showErrorMessage: state => state.showErrorMessage,
+  errorMessage: state => state.errorMessage,
 };
 
 const mutations = {

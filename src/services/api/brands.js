@@ -1,6 +1,9 @@
 import axios from 'axios';
 export default {
-  list(query = { sort: 'createdAt', order: '1' }) {
+  list(query) {
+    if (query && !query.sort && !query.order) {
+      (query.sort = 'createdAt'), (query.order = 'desc');
+    }
     return axios.get('/api/brands', { params: query });
   },
   update(id, payload) {

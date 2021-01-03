@@ -10,11 +10,10 @@
 export default {
   data() {
     return {
-      imageBg: "/images/loginbg.jpg",
+      imageBg: '/images/loginbg.jpg',
     };
   },
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

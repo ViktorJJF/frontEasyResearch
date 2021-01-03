@@ -13,7 +13,7 @@
                 class="fadeIn first circular"
                 aspect-ratio="2"
                 contain
-                src="https://media-exp1.licdn.com/dms/image/C4E0BAQFQ0Vrm64qW6Q/company-logo_200_200/0/1551294877165?e=1617235200&v=beta&t=5Nyzd1r1mHsRVBwrE2MNxmsspL7lknh0mlm-WBqtgfw"
+                :src="$store.state.businessImage"
               ></v-img>
             </div>
 
@@ -27,6 +27,7 @@
               v-model="user.email"
               label="Correo"
               prepend-inner-icon="mdi-account"
+              :clearable="false"
             />
             <VTextFieldWithValidation
               id="password"
@@ -37,6 +38,7 @@
               label="Contraseña"
               prepend-inner-icon="mdi-lock"
               type="password"
+              :clearable="false"
             />
             <v-btn
               :loading="loading"
@@ -55,7 +57,7 @@
 </template>
 
 <script>
-import VTextFieldWithValidation from "@/components/inputs/VTextFieldWithValidation";
+import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation';
 export default {
   components: {
     VTextFieldWithValidation,
@@ -63,12 +65,12 @@ export default {
   data() {
     return {
       loading: false,
-      user: { email: "", password: "" },
+      user: { email: '', password: '' },
     };
   },
   created() {
     if (this.$store.state.authModule.isTokenSet) {
-      this.$router.push({ name: "dashboard" });
+      this.$router.push({ name: 'dashboard' });
     }
   },
   methods: {
@@ -76,12 +78,12 @@ export default {
       let user = this.user;
       // this.loading = true;
       this.$store
-        .dispatch("authModule/login", user)
+        .dispatch('authModule/login', user)
         .then(() => {
-          this.$router.push({ name: "dashboard" });
+          this.$router.push({ name: 'dashboard' });
         })
-        .catch((error) => {
-          console.log("error en login: ", error);
+        .catch(error => {
+          console.log('error en login: ', error);
         })
         .finally(() => (this.loading = false));
     },
@@ -90,7 +92,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Poppins");
+@import url('https://fonts.googleapis.com/css?family=Poppins');
 /* BASIC */
 .circular {
   width: 200px;
@@ -104,10 +106,10 @@ export default {
 .backgroundImage {
   height: 100%;
   background-color: #9b0d33;
-  opacity: 0.9;
+  /* opacity: 0.9; */
 }
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   height: 100vh;
 }
 a {
@@ -186,21 +188,21 @@ h2.active {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
-input[type="button"]:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover {
+input[type='button']:hover,
+input[type='submit']:hover,
+input[type='reset']:hover {
   background-color: #39ace7;
 }
-input[type="button"]:active,
-input[type="submit"]:active,
-input[type="reset"]:active {
+input[type='button']:active,
+input[type='submit']:active,
+input[type='reset']:active {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
-input[type="text"] {
+input[type='text'] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -220,11 +222,11 @@ input[type="text"] {
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
 }
-input[type="text"]:focus {
+input[type='text']:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
-input[type="text"]:placeholder {
+input[type='text']:placeholder {
   color: #cccccc;
 }
 /* ANIMATIONS */
@@ -326,7 +328,7 @@ input[type="text"]:placeholder {
   width: 0;
   height: 2px;
   background-color: #56baed;
-  content: "";
+  content: '';
   transition: width 0.2s;
 }
 .underlineHover:hover {

@@ -1,3 +1,4 @@
+//usar esto para consultar en base de datos sin paginacion del server
 import api from '@/services/api/users';
 import { buildSuccess, handleError } from '@/utils/utils.js';
 
@@ -74,7 +75,7 @@ const module = {
       state.users = data;
     },
     create(state, data) {
-      state.users.push(data);
+      state.users.unshift(data);
     },
     update(state, { id, data }) {
       let indexToUpdate = state.users.findIndex(member => member._id == id);

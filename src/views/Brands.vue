@@ -18,6 +18,8 @@
           @page-count="pageCount = $event"
           :page.sync="page"
           :items-per-page="$store.state.itemsPerPage"
+          :options.sync="pagination"
+          :server-items-length="totalItems"
         >
           <template v-slot:top>
             <v-container>
@@ -89,15 +91,43 @@
                   </v-dialog>
                 </v-col>
               </v-row>
+              <v-row>
+                <v-col cols="12" sm="12">
+                  <span>
+                    <strong>Mostrando:</strong>
+                    {{
+                      $store.state.itemsPerPage > items.length
+                        ? items.length
+                        : $store.state.itemsPerPage
+                    }}
+                    de {{ totalItems }} registros
+                  </span>
+                </v-col>
+              </v-row>
+              <div class="text-center pt-2">
+                <v-pagination
+                  @input="initialize(page)"
+                  v-model="page"
+                  :length="pageCount"
+                  :total-visible="$store.state.maxPaginationButtons"
+                ></v-pagination>
+              </div>
             </v-container>
           </template>
           <template v-slot:[`item.action`]="{ item }">
-            <v-btn class="mr-3" small color="secondary" @click="editItem(item)"
-              >Editar</v-btn
+            <v-btn
+              class="mr-1 mb-1"
+              color="primary"
+              fab
+              small
+              dark
+              @click="editItem(item)"
             >
-            <v-btn small color="error" @click="deleteItem(item)"
-              >Eliminar</v-btn
-            >
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn>
+            <v-btn color="error" fab small dark @click="deleteItem(item)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
           </template>
           <template v-slot:no-data>
             <v-alert type="error" :value="true"
@@ -121,15 +151,20 @@
           <span>
             <strong>Mostrando:</strong>
             {{
-              $store.state.itemsPerPage > brands.length
-                ? brands.length
+              $store.state.itemsPerPage > items.length
+                ? items.length
                 : $store.state.itemsPerPage
             }}
-            de {{ brands.length }} registros
+            de {{ totalItems }} registros
           </span>
         </v-col>
         <div class="text-center pt-2">
-          <v-pagination v-model="page" :length="pageCount"></v-pagination>
+          <v-pagination
+            @input="initialize(page)"
+            v-model="page"
+            :length="pageCount"
+            :total-visible="$store.state.maxPaginationButtons"
+          ></v-pagination>
         </div>
       </material-card>
     </v-row>
@@ -137,9 +172,9 @@
 </template>
 
 <script>
-const ITEMS = 'brands';
+const ENTITY = 'brands';
 const CLASS_ITEMS = () =>
-  import(`@/classes/${ITEMS.charAt(0).toUpperCase() + ITEMS.slice(1)}`);
+  import(`@/classes/${ENTITY.charAt(0).toUpperCase() + ENTITY.slice(1)}`);
 // const ITEMS_SPANISH = 'marcas';
 import { format } from 'date-fns';
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation';
@@ -155,11 +190,8 @@ export default {
     },
   },
   data: () => ({
-    page: 1,
-    pageCount: 0,
-    loadingButton: false,
-    search: '',
-    dialog: false,
+    //datos del componente
+    fieldsToSearch: ['name'],
     headers: [
       {
         text: 'Nombre',
@@ -181,32 +213,54 @@ export default {
       },
       { text: 'Acciones', value: 'action', sortable: false },
     ],
-    [ITEMS]: [],
-    advisors: [],
+    delayTimer: null,
+    [ENTITY]: [],
     editedIndex: -1,
     editedItem: CLASS_ITEMS(),
     defaultItem: CLASS_ITEMS(),
-    menu1: false,
-    menu2: false,
+    //configuracion de la tabla
+    pagination: {},
+    dataTableLoading: true,
+    page: 1,
+    pageCount: 0,
+    loadingButton: false,
+    search: '',
+    dialog: false,
   }),
 
   computed: {
+    totalItems() {
+      return this.$store.state[ENTITY + 'Module'].total;
+    },
+    totalPages() {
+      return this.$store.state[ENTITY + 'Module'].totalPages;
+    },
     formTitle() {
       return this.editedIndex === -1
         ? this.$t(this.entity + '.NEW_ITEM')
         : this.$t(this.entity + '.EDIT_ITEM');
     },
     items() {
-      return this[ITEMS];
+      return this[ENTITY];
     },
     entity() {
-      return ITEMS;
+      return ENTITY;
     },
   },
 
   watch: {
     dialog(val) {
       val || this.close();
+    },
+    async search() {
+      clearTimeout(this.delayTimer);
+      this.delayTimer = setTimeout(() => {
+        this.initialize(this.page);
+      }, 600);
+    },
+    telefonoId() {
+      //buscar con algun campo en particular?
+      this.initialize(1);
     },
   },
 
@@ -215,21 +269,32 @@ export default {
   },
 
   methods: {
-    initialize() {
-      this[ITEMS] = this.$deepCopy(this.$store.state[ITEMS + 'Module'][ITEMS]);
+    async initialize(page = 1) {
+      //llamada asincrona de items
+      await Promise.all([
+        this.$store.dispatch(ENTITY + 'Module/list', {
+          page,
+          search: this.search,
+          fieldsToSearch: this.fieldsToSearch,
+        }),
+      ]);
+      //asignar al data del componente
+      this[ENTITY] = this.$deepCopy(
+        this.$store.state[ENTITY + 'Module'][ENTITY],
+      );
     },
     editItem(item) {
-      this.editedIndex = this[ITEMS].indexOf(item);
+      this.editedIndex = this[ENTITY].indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     async deleteItem(item) {
-      const index = this[ITEMS].indexOf(item);
-      let itemId = this[ITEMS][index]._id;
+      const index = this[ENTITY].indexOf(item);
+      let itemId = this[ENTITY][index]._id;
       if (await this.$confirm('¿Realmente deseas eliminar este registro?')) {
         await this.$store.dispatch('brandsModule/delete', itemId);
-        this[ITEMS].splice(index, 1);
+        this[ENTITY].splice(index, 1);
       }
     },
 
@@ -244,13 +309,13 @@ export default {
     async save() {
       this.loadingButton = true;
       if (this.editedIndex > -1) {
-        let itemId = this[ITEMS][this.editedIndex]._id;
+        let itemId = this[ENTITY][this.editedIndex]._id;
         try {
-          await this.$store.dispatch(ITEMS + 'Module/update', {
+          await this.$store.dispatch(ENTITY + 'Module/update', {
             id: itemId,
             data: this.editedItem,
           });
-          Object.assign(this[ITEMS][this.editedIndex], this.editedItem);
+          Object.assign(this[ENTITY][this.editedIndex], this.editedItem);
           this.close();
         } finally {
           this.loadingButton = false;
@@ -259,11 +324,12 @@ export default {
         //create item
         try {
           let newItem = await this.$store.dispatch(
-            ITEMS + 'Module/create',
+            ENTITY + 'Module/create',
             this.editedItem,
           );
-          this[ITEMS].push(newItem);
+          this[ENTITY].push(newItem);
           this.close();
+          this.initialize();
         } finally {
           this.loadingButton = false;
         }

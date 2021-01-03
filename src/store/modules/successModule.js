@@ -1,10 +1,10 @@
 const namespaced = true;
 
 const getters = {
-  showSuccessMessage: (state) => state.successMessage,
-  successMessage: (state) => state.successMessage,
-  successMessageParams: (state) => state.successMessageParams,
-  successMessageTimeout: (state) => state.successMessageTimeout,
+  showSuccessMessage: state => state.successMessage,
+  successMessage: state => state.successMessage,
+  successMessageParams: state => state.successMessageParams,
+  successMessageTimeout: state => state.successMessageTimeout,
 };
 
 const mutations = {
@@ -36,7 +36,7 @@ const state = {
   showSuccessMessage: false,
   successMessage: null,
   successMessageParams: [],
-  successMessageTimeout: 0,
+  successMessageTimeout: -1,
 };
 
 export default {

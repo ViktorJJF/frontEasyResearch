@@ -3,10 +3,10 @@ const namespaced = true;
 const getters = {
   // showLoading: state => state.showLoading
 };
-const actions={
-  showLoading({commit},value){
-    commit("showLoading",value)
-  }
+const actions = {
+  showLoading({ commit }, value) {
+    commit('showLoading', value);
+  },
 };
 const mutations = {
   showLoading(state, value = true) {

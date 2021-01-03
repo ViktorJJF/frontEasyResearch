@@ -1,6 +1,6 @@
-import { addMinutes, isPast, format, fromUnixTime } from "date-fns";
-import update from "@/services/api/updateSite";
-import { store } from "@/store";
+import { addMinutes, isPast, format, fromUnixTime } from 'date-fns';
+import update from '@/services/api/updateSite';
+import { store } from '@/store';
 
 const MINUTES_TO_CHECK_FOR_UPDATES = 120;
 
@@ -22,10 +22,10 @@ export const compareVersion = (latestVersion, localVersion) => {
 
 // If no localstorage appVersion or checkForAppUpdatesAt have been set, then set them
 export const setLocalStorageDateForUpdates = () => {
-  if (window.localStorage.getItem("checkForAppUpdatesAt") === null) {
+  if (window.localStorage.getItem('checkForAppUpdatesAt') === null) {
     window.localStorage.setItem(
-      "checkForAppUpdatesAt",
-      JSON.stringify(format(new Date(), "t"))
+      'checkForAppUpdatesAt',
+      JSON.stringify(format(new Date(), 't')),
     );
   }
 };
@@ -34,10 +34,10 @@ export const setLocalStorageDateForUpdates = () => {
 export const checkIfUpdateIsNeeded = (latestVersion, localVersion) => {
   // Set new date/time for next update check
   window.localStorage.setItem(
-    "checkForAppUpdatesAt",
+    'checkForAppUpdatesAt',
     JSON.stringify(
-      format(addMinutes(new Date(), MINUTES_TO_CHECK_FOR_UPDATES), "t")
-    )
+      format(addMinutes(new Date(), MINUTES_TO_CHECK_FOR_UPDATES), 't'),
+    ),
   );
   // If there is a new version available, so refresh page
   const shouldForceRefresh = compareVersion(latestVersion, localVersion);
@@ -55,14 +55,14 @@ export const checkForUpdates = () => {
     isPast(
       new Date(
         fromUnixTime(
-          JSON.parse(window.localStorage.getItem("checkForAppUpdatesAt"))
-        )
-      )
+          JSON.parse(window.localStorage.getItem('checkForAppUpdatesAt')),
+        ),
+      ),
     )
   ) {
     update
       .checkIfUpdatedSiteVersion()
-      .then((response) => {
+      .then(response => {
         if (response.status === 200) {
           // Get latestVersion from response
           const latestVersion = response.data.version.trim();
@@ -73,6 +73,6 @@ export const checkForUpdates = () => {
         }
       })
       // eslint-disable-next-line no-unused-vars
-      .catch((error) => {});
+      .catch(error => {});
   }
 };

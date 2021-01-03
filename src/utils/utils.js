@@ -1,66 +1,39 @@
-export const addCustomScript = (src) => {
-  let recaptchaScript = document.createElement("script");
-  recaptchaScript.setAttribute("src", src);
+const addCustomScript = src => {
+  let recaptchaScript = document.createElement('script');
+  recaptchaScript.setAttribute('src', src);
   recaptchaScript.async = true;
   document.head.appendChild(recaptchaScript);
 };
 
-import { isPast, format } from "date-fns";
-import store from "@/store";
+import { isPast, format } from 'date-fns';
+import store from '@/store';
 
-// export let msToTime = (duration) => {
-//   //   var milliseconds = parseInt((duration % 1000) / 100),
-//   (seconds = Math.floor((duration / 1000) % 60)),
-//     (minutes = Math.floor((duration / (1000 * 60)) % 60)),
-//     (hours = Math.floor((duration / (1000 * 60 * 60)) % 24));
-
-//   return (
-//     (hours > 0 ? (hours != 1 ? hours + " horas " : hours + " hora ") : "") +
-//     (minutes > 0 ? minutes + " minutos" : "") +
-//     (seconds > 0 ? seconds + " segundos" : "")
-//   );
-//   // seconds +
-//   // " segundos"
-// };
-
-// export const isLogged = () => {
-//   return new Promise((resolve, reject) => {
-//     axios
-//       .post("/api/users/logged")
-//       .then((res) => {
-//         if (res.data.ok) {
-//           resolve(res.data.payload);
-//         } else {
-//           resolve(false);
-//         }
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//         reject(err);
-//       });
-//   });
-// };
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 // const localesDateFns = {
 //     en: require('date-fns/locale/en'),
 //     es: require('date-fns/locale/es')
 // }
 
-export const getFormat = (date, formatStr) => {
+const getFormat = (date, formatStr) => {
   // return format(date, formatStr, {
   //     locale: localesDateFns[window.__localeId__]
   // })
   return format(date, formatStr);
 };
 
-export const formatErrorMessages = (translationParent, msg) => {
+const formatErrorMessages = (translationParent, msg) => {
   const errorArray = [];
   // Check for error msgs
   if (msg !== null) {
     const json = JSON.parse(JSON.stringify(msg));
     // If error message is an array, then we have mutiple errors
     if (Array.isArray(json)) {
-      json.map((error) => {
+      json.map(error => {
         errorArray.push(`${error.msg}`);
       });
     } else {
@@ -73,7 +46,7 @@ export const formatErrorMessages = (translationParent, msg) => {
   return null;
 };
 
-export const buildPayloadPagination = (pagination, search) => {
+const buildPayloadPagination = (pagination, search) => {
   const { page, itemsPerPage } = pagination;
   let { sortDesc, sortBy } = pagination;
 
@@ -83,7 +56,7 @@ export const buildPayloadPagination = (pagination, search) => {
       // Gets order
       sortDesc = sortDesc[0] === true ? -1 : 1;
       // Gets column to sort on
-      sortBy = sortBy ? sortBy[0] : "";
+      sortBy = sortBy ? sortBy[0] : '';
     }
 
   let query = {};
@@ -115,67 +88,97 @@ export const buildPayloadPagination = (pagination, search) => {
   return query;
 };
 
+const buildQueryWithPagination = query => {
+  let queryWithPagination = {};
+  if (query && query.page) {
+    let { page, search, fieldsToSearch } = query;
+    queryWithPagination = buildPayloadPagination(
+      {
+        page,
+        itemsPerPage: store.state.itemsPerPage,
+      },
+      search ? { query: search, fields: fieldsToSearch.join(',') } : {},
+    );
+    delete query['page'];
+    delete query['fieldsToSearch'];
+    delete query['search'];
+  }
+  return { ...queryWithPagination, ...query };
+};
+
 // Catches error connection or any other error (checks if error.response exists)
-export const handleError = (error, commit, reject) => {
-  let errMsg = "";
+const handleError = (error, commit, reject) => {
+  let errMsg = '';
   // Resets errors in store
-  commit("loadingModule/showLoading", false, { root: true });
-  commit("errorModule/error", null, { root: true });
-  console.log("sucedio un error....");
-  console.log("el error: ", error);
+  commit('loadingModule/showLoading', false, { root: true });
+  commit('errorModule/error', null, { root: true });
+  console.log('sucedio un error....');
+  console.log('el error: ', error);
   // Checks if unauthorized
   if (!error.response) {
-    commit("errorModule/error", "La solicitud tardó mucho tiempo...", {
+    commit('errorModule/error', 'La solicitud tardó mucho tiempo...', {
       root: true,
     });
     return reject(error);
   }
   if (error.response.status === 401) {
-    store.dispatch("authModule/logout", { root: true });
-    console.log("se fue al loign");
+    store.dispatch('authModule/logout', { root: true });
+    console.log('se fue al loign');
   } else {
-    console.log("se produjo else");
+    console.log('se produjo else');
     // Any other error
     errMsg = error.response
       ? error.response.data.errors.msg
-      : "SERVER_TIMEOUT_CONNECTION_ERROR";
+      : 'SERVER_TIMEOUT_CONNECTION_ERROR';
     setTimeout(() => {
       return errMsg
-        ? commit("errorModule/error", errMsg, { root: true })
-        : commit("errorModule/showError", false, { root: true });
+        ? commit('errorModule/error', errMsg, { root: true })
+        : commit('errorModule/showError', false, { root: true });
     }, 0);
   }
   reject(error);
 };
 
-export const buildSuccess = (msg, commit) => {
-  commit("loadingModule/showLoading", false, { root: true });
-  commit("successModule/success", null, {
+const buildSuccess = (msg, commit) => {
+  commit('loadingModule/showLoading', false, { root: true });
+  commit('successModule/success', null, {
     root: true,
   });
   setTimeout(() => {
     return msg
-      ? commit("successModule/success", msg, { root: true })
-      : commit("successModule/showSuccess", false, { root: true });
+      ? commit('successModule/success', msg, { root: true })
+      : commit('successModule/showSuccess', false, { root: true });
   }, 0);
-  commit("errorModule/error", null, { root: true });
+  commit('errorModule/error', null, { root: true });
 };
 
 // Checks if tokenExpiration in localstorage date is past, if so then trigger an update
-export const checkIfTokenNeedsRefresh = () => {
+const checkIfTokenNeedsRefresh = () => {
   // Checks if time set in localstorage is past to check for refresh token
   if (
-    window.localStorage.getItem("token") !== null &&
-    window.localStorage.getItem("tokenExpiration") !== null
+    window.localStorage.getItem('token') !== null &&
+    window.localStorage.getItem('tokenExpiration') !== null
   ) {
     if (
       isPast(
         new Date(
-          JSON.parse(window.localStorage.getItem("tokenExpiration")) * 1000
-        )
+          JSON.parse(window.localStorage.getItem('tokenExpiration')) * 1000,
+        ),
       )
     ) {
-      store.dispatch("refreshToken");
+      store.dispatch('refreshToken');
     }
   }
+};
+
+export {
+  addCustomScript,
+  getRandomInt,
+  getFormat,
+  formatErrorMessages,
+  buildPayloadPagination,
+  buildQueryWithPagination,
+  handleError,
+  buildSuccess,
+  checkIfTokenNeedsRefresh,
 };

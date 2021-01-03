@@ -1,40 +1,40 @@
-import Vue from "vue";
-import axios from "axios";
+import Vue from 'vue';
+import axios from 'axios';
 // import { checkIfTokenNeedsRefresh } from "@/utils/utils.js";
 // import { checkForUpdates } from "@/utils/updates.js";
 
 axios.defaults.timeout = 20000;
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL || "";
-axios.defaults.headers.common["Accept-Language"] =
-  JSON.parse(localStorage.getItem("locale")) || "es";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL || '';
+axios.defaults.headers.common['Accept-Language'] =
+  JSON.parse(localStorage.getItem('locale')) || 'es';
 
 axios.interceptors.request.use(
-  (config) => {
+  config => {
     // Do something before request is sent
     // If request is different than any of the URLS in urlsExcludedForBearerHeader
     // then send Authorization header with token from localstorage
     const urlsExcludedForBearerHeader = [
-      "/api/login",
-      "/api/forgot",
-      "/api/register",
-      "/api/reset",
+      '/api/login',
+      '/api/forgot',
+      '/api/register',
+      '/api/reset',
       `${window.location.origin}/version.json`,
     ];
     if (urlsExcludedForBearerHeader.indexOf(config.url) === -1) {
-      config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+      config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
     }
     return config;
   },
-  (error) => {
+  error => {
     // Do something with request error
     return Promise.reject(error);
-  }
+  },
 );
 
 // Add a response interceptor
 axios.interceptors.response.use(
-  (response) => {
+  response => {
     // Do something with response data
     // Checks if app is being used in mobile
     // if (
@@ -46,14 +46,14 @@ axios.interceptors.response.use(
     // }
     return response;
   },
-  (error) => {
+  error => {
     // Do something with response error
     return Promise.reject(error);
-  }
+  },
 );
 
 // eslint-disable-next-line no-shadow
-Plugin.install = (Vue) => {
+Plugin.install = Vue => {
   Vue.axios = axios;
   window.axios = axios;
   Object.defineProperties(Vue.prototype, {

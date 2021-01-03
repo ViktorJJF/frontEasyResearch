@@ -17,14 +17,14 @@
 
 <script>
 export default {
-  name: "SuccessMessage",
+  name: 'SuccessMessage',
   computed: {
     showSuccessMessage: {
       get() {
         return this.$store.state.successModule.showSuccessMessage;
       },
       set(value) {
-        this.$store.commit("successModule/showSuccess", value);
+        this.$store.commit('successModule/showSuccess', value);
       },
     },
     successMessage() {
@@ -37,12 +37,11 @@ export default {
   watch: {
     successMessage() {
       setTimeout(() => {
-        this.showSuccessMessage = this.successMessage !== "";
+        this.showSuccessMessage = this.successMessage !== '';
       }, 100);
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

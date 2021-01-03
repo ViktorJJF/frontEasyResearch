@@ -1,7 +1,13 @@
 <template>
   <v-overlay :value="overlay">
-    <v-progress-circular z-index="1" :size="90" :width="3" color="white" indeterminate></v-progress-circular>
-    <!-- <p class="ml-n3">{{overlayText}}</p> -->
+    <v-progress-circular
+      z-index="1"
+      :size="90"
+      :width="3"
+      color="primary"
+      indeterminate
+    ></v-progress-circular>
+    <!-- <p class="ml-n3">Cargando...</p> -->
   </v-overlay>
 </template>
 

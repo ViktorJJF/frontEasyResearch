@@ -1,9 +1,9 @@
-import Vue from "vue";
-import deepcopy from "deepcopy";
+import Vue from 'vue';
+import deepcopy from 'deepcopy';
 
 const deepCopy = {
-  install: (Vue) => {
-    Vue.prototype.$deepCopy = (src) => {
+  install: Vue => {
+    Vue.prototype.$deepCopy = src => {
       return deepcopy(src);
     };
   },

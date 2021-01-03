@@ -46,19 +46,19 @@
 </template>
 
 <script>
-import HelperOffset from "@/components/helper/Offset";
+import HelperOffset from '@/components/helper/Offset';
 export default {
   components: {
     HelperOffset,
   },
-  name: "MaterialCard",
+  name: 'MaterialCard',
 
   inheritAttrs: false,
 
   props: {
     width: {
       type: String,
-      default: "100%",
+      default: '100%',
     },
     icon: {
       type: String,
@@ -66,7 +66,7 @@ export default {
     },
     color: {
       type: String,
-      default: "secondary",
+      default: 'secondary',
     },
     elevation: {
       type: [Number, String],

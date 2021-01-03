@@ -1,10 +1,10 @@
 export default () => ({
-  dni: "",
-  name: "",
-  lastname: "",
-  initService: "",
-  endService: "",
+  dni: '',
+  name: '',
+  lastname: '',
+  initService: '',
+  endService: '',
   extension: false,
-  extensionDate: "",
-  advisorId: "",
+  extensionDate: '',
+  advisorId: '',
 });

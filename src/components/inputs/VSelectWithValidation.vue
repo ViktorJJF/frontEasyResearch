@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ValidationProvider } from "vee-validate";
+import { ValidationProvider } from 'vee-validate';
 export default {
   components: {
     ValidationProvider,
@@ -27,7 +27,7 @@ export default {
   props: {
     rules: {
       type: [Object, String],
-      default: "",
+      default: '',
     },
     value: {
       type: null,
@@ -48,12 +48,12 @@ export default {
     },
   },
   data: () => ({
-    innerValue: "",
+    innerValue: '',
   }),
   watch: {
     // Handles internal model changes.
     innerValue(newVal) {
-      this.$emit("input", newVal);
+      this.$emit('input', newVal);
     },
     // Handles external model changes.
     value(newVal) {

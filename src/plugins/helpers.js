@@ -1,6 +1,6 @@
 export default {
-    formattedDate: (dateInMilliseconds) => {
-        let time = new Date(dateInMilliseconds);
-        return time.toLocaleString();
-    }
-}
+  formattedDate: dateInMilliseconds => {
+    let time = new Date(dateInMilliseconds);
+    return time.toLocaleString();
+  },
+};

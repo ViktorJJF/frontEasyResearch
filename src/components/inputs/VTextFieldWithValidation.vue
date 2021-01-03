@@ -2,7 +2,7 @@
   <ValidationProvider :name="$attrs.label" :rules="rules" v-slot="{ errors }">
     <v-text-field
       :class="customClasses"
-      clearable
+      :clearable="clearable"
       dense
       single-line
       outlined
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { ValidationProvider } from "vee-validate";
+import { ValidationProvider } from 'vee-validate';
 export default {
   components: {
     ValidationProvider,
@@ -24,7 +24,7 @@ export default {
   props: {
     rules: {
       type: [Object, String],
-      default: "",
+      default: '',
     },
     // must be included in props
     value: {
@@ -32,16 +32,20 @@ export default {
     },
     customClasses: {
       type: String,
-      default: "",
+      default: '',
+    },
+    clearable: {
+      type: Boolean,
+      default: true,
     },
   },
   data: () => ({
-    innerValue: "",
+    innerValue: '',
   }),
   watch: {
     // Handles internal model changes.
     innerValue(newVal) {
-      this.$emit("input", newVal);
+      this.$emit('input', newVal);
     },
     // Handles external model changes.
     value(newVal) {

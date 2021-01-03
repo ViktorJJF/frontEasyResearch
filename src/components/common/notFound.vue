@@ -1,16 +1,29 @@
 <template>
-  <div>
-    <aside>
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/4424790/Mirror.png" alt="404 Image" />
-    </aside>
-    <main>
-      <h1>¡Disculpas!</h1>
-      <p>
-        La página que intentas visitar no existe o está en mantenimiento
-        <em>. . . mantenimiento.</em>
-      </p>
-      <button @click="goOut">Salir de aquí!</button>
-    </main>
+  <div class="dt-root">
+    <div class="dt-root__inner">
+      <div class="dt-page--container">
+        <!-- 404 Page -->
+        <div class="error-page text-center">
+          <!-- Title -->
+          <h1 class="titleDrift">404</h1>
+          <!-- /title -->
+
+          <p class="display-2 text-dark mb-7">¡Perdón! Página no encontrada</p>
+          <p class="mb-10">
+            El enlace que seguiste probablemente está roto, o fue removido.
+          </p>
+
+          <!-- Search Box -->
+          <form class="search-box right-side-icon">
+            <v-btn large color="primary" @click="goOut">Volver</v-btn>
+          </form>
+          <!-- /search box -->
+
+          <!---->
+        </div>
+        <!-- /404 page -->
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,121 +31,10 @@
 export default {
   methods: {
     goOut() {
-      this.$router.push("/");
+      this.$router.push('/');
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Fontdiner+Swanky&family=Roboto:wght@500&display=swap");
-
-$lime: #c5dc50;
-$rasp: #f36a6f;
-$seed: #383838;
-$sm: 1rem;
-$md: 2.5rem;
-$lg: 4rem;
-
-* {
-  box-sizing: 0;
-  margin: 0;
-  padding: 0;
-  cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4424790/cursors-edge.png"),
-    auto;
-}
-
-body {
-  background: linear-gradient(to right, white 50%, $seed 50%);
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: white;
-}
-
-div {
-  display: flex;
-  align-items: center;
-  height: 100vh;
-  max-width: 1000px;
-  width: calc(100% - #{$lg});
-  margin: 0 auto;
-  > * {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    max-width: 500px;
-    width: 100%;
-    padding: $md;
-  }
-}
-
-aside {
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4424790/right-edges.png");
-  background-position: top right;
-  background-repeat: no-repeat;
-  background-size: 25px 100%;
-  img {
-    display: block;
-    height: auto;
-    width: 100%;
-  }
-}
-
-main {
-  text-align: center;
-  h1 {
-    font-family: "Fontdiner Swanky", cursive;
-    font-size: $lg;
-    color: $lime;
-    margin-bottom: $sm;
-  }
-  p {
-    margin-bottom: $md;
-    em {
-      font-style: italic;
-      color: $lime;
-    }
-  }
-  button {
-    font-family: "Fontdiner Swanky", cursive;
-    font-size: $sm;
-    color: $seed;
-    border: none;
-    background-color: $rasp;
-    padding: $sm $md;
-    transform: skew(-5deg);
-    transition: all 0.1s ease;
-    cursor: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4424790/cursors-eye.png"),
-      auto;
-    &:hover {
-      background-color: $lime;
-      transform: scale(1.15);
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  body {
-    background: $seed;
-    font-size: 16px;
-  }
-  div {
-    flex-flow: column;
-    > * {
-      max-width: 700px;
-      height: 100%;
-    }
-  }
-  aside {
-    background-image: none;
-    background-color: white;
-    img {
-      max-width: 300px;
-    }
-  }
-}
-</style>
+<style lang="scss" scoped></style>

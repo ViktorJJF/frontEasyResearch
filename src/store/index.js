@@ -1,18 +1,20 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 //plugins
-import modules from "./modules";
+import modules from './modules';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: modules,
   state: {
+    businessImage: '/img/viktorjjf.png',
+    maxPaginationButtons: 15,
     itemsPerPage: 20,
     snackbar: {
-      text: "",
+      text: '',
       active: false,
-      color: "success",
+      color: 'success',
     },
     toolbar: {
       drawerIcon: null,
@@ -28,7 +30,7 @@ export default new Vuex.Store({
   },
   actions: {
     showOverlay({ commit }, active) {
-      commit("showOverlay", active);
+      commit('showOverlay', active);
     },
   },
 });
