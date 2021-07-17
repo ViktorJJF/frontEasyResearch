@@ -1,75 +1,44 @@
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import axios from 'axios';
-// import { checkIfTokenNeedsRefresh } from "@/utils/utils.js";
-// import { checkForUpdates } from "@/utils/updates.js";
+import Form from '@/services/form';
 
-axios.defaults.timeout = 20000;
+window.Vue = Vue;
+Vue.use(VueRouter);
+window.axios = axios;
+window.Form = Form;
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL || '';
-axios.defaults.headers.common['Accept-Language'] =
-  JSON.parse(localStorage.getItem('locale')) || 'es';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['Authorization'] =
+  'Bearer ' + localStorage.getItem('auth_token');
 
-axios.interceptors.request.use(
-  config => {
-    // Do something before request is sent
-    // If request is different than any of the URLS in urlsExcludedForBearerHeader
-    // then send Authorization header with token from localstorage
-    const urlsExcludedForBearerHeader = [
-      '/api/login',
-      '/api/forgot',
-      '/api/register',
-      '/api/reset',
-      `${window.location.origin}/version.json`,
-    ];
-    if (urlsExcludedForBearerHeader.indexOf(config.url) === -1) {
-      config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-    }
-    return config;
-  },
-  error => {
-    // Do something with request error
-    return Promise.reject(error);
-  },
-);
+/**
+ * Next we will register the CSRF Token as a common header with Axios so that
+ * all outgoing HTTP requests automatically have it attached. This is just
+ * a simple convenience so we don't have to attach every token manually.
+ */
 
-// Add a response interceptor
-axios.interceptors.response.use(
-  response => {
-    // Do something with response data
-    // Checks if app is being used in mobile
-    // if (
-    //   response.config.url !== `${process.env.VUE_APP_API_URL}/token` &&
-    //   response.config.url !== `${window.location.origin}/version.json`
-    // ) {
-    //   //   checkForUpdates();
-    //   checkIfTokenNeedsRefresh();
-    // }
-    return response;
-  },
-  error => {
-    // Do something with response error
-    return Promise.reject(error);
-  },
-);
+let token = document.head.querySelector('meta[name="csrf-token"]');
 
-// eslint-disable-next-line no-shadow
-Plugin.install = Vue => {
-  Vue.axios = axios;
-  window.axios = axios;
-  Object.defineProperties(Vue.prototype, {
-    axios: {
-      get() {
-        return axios;
-      },
-    },
-    $axios: {
-      get() {
-        return axios;
-      },
-    },
-  });
-};
+if (token) {
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+} else {
+  console.error(
+    'CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token',
+  );
+}
 
-Vue.use(Plugin);
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
 
-export default Plugin;
+// import Echo from 'laravel-echo'
+
+// window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'your-pusher-key'
+// });

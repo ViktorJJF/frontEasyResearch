@@ -163,6 +163,7 @@ const CLASS_ITEMS = () =>
 import { format } from 'date-fns';
 import VTextFieldWithValidation from '@/components/inputs/VTextFieldWithValidation';
 import MaterialCard from '@/components/material/Card';
+import axios from 'axios';
 export default {
   components: {
     MaterialCard,
@@ -247,6 +248,14 @@ export default {
       this[ENTITY] = this.$deepCopy(
         this.$store.state[ENTITY + 'Module'][ENTITY],
       );
+      axios
+        .get('/api/users')
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
     },
     editItem(item) {
       this.editedIndex = this[ENTITY].indexOf(item);

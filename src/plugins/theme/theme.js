@@ -1,13 +1,15 @@
 export default {
   themes: {
     light: {
-      primary: '#1A73E8',
-      secondary: '#007bff',
-      accent: '#bc5090',
-      error: '#dc3545',
+      primary: '#001F3E',
+      secondary: '#00597E',
+      tertiary: '#00458b',
+      accent: '#82B1FF',
+      error: '#f55a4e',
       info: '#2196F3',
-      success: '#28a745',
-      warning: '#FFC450',
+      success: '#138A07',
+      warning: '#ffa21a',
+      cardOrange: '#F5AE4E',
     },
   },
 };

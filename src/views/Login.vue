@@ -82,7 +82,7 @@ export default {
         .then(() => {
           this.$router.push({ name: 'dashboard' });
         })
-        .catch(error => {
+        .catch((error) => {
           console.log('error en login: ', error);
         })
         .finally(() => (this.loading = false));

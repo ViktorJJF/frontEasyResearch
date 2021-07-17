@@ -1,0 +1,152 @@
+{
+    "citationItems": [
+        {
+            "id": "ITEM-1",
+            "itemData": {
+                "ISBN": "9788429020588",
+                "abstract": "Este libro trata sobre un tema de absoluta actualidad, robots y responsabilidad civil por los daños que éstos puedan causar, tiene un doble contenido. Se ocupa en primer lugar de la implantación de la robótica en nuestros días y sus expectativas de futuro. Se incluye en esta parte el examen de algunos de los términos que habitualmente se emplean en ese campo fuertemente tecnificado, y que no son de fácil comprensión para personas no expertas en la materia. La parte central del libro versa sobre el primer documento de la Unión Europea previo a la elaboración de una directiva que regule la robótica (la Resolución aprobada el 16 de febrero de 2017). Se examinan las cuestiones generales que plantea la mencionada Resolución, con particular atención a los problemas que pueden presentarse en torno a la responsabilidad civil por los daños que puedan causar los robots con su actuación, muchos de ellos no contemplados en la mencionada Resolución",
+                "author": [
+                    {
+                        "dropping-particle": "",
+                        "family": "Reus",
+                        "given": "Editorial",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    },
+                    {
+                        "dropping-particle": "",
+                        "family": "Reus",
+                        "given": "Editorial",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    }
+                ],
+                "id": "ITEM-1",
+                "issued": {
+                    "date-parts": [
+                        [
+                            "2019"
+                        ]
+                    ]
+                },
+                "number-of-pages": "1-5",
+                "publisher": "Editorial Reus",
+                "title": "Robots y responsabilidad civil",
+                "type": "book"
+            },
+            "uris": [
+                "http://www.mendeley.com/documents/?uuid=96a2788c-4cae-30e9-b91d-1913a630bcb0"
+            ]
+        }
+    ],
+    "mendeley": {
+        "formattedCitation": "(Reus y Reus, 2019)",
+        "plainTextFormattedCitation": "(Reus y Reus, 2019)",
+        "previouslyFormattedCitation": "(Reus y Reus, 2019)"
+    },
+    "properties": {
+        "noteIndex": 0
+    },
+    "schema": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json"
+}
+
+{
+    "citationItems": [
+        {
+            "id": "ITEM-1",
+            "itemData": {
+                "DOI": "10.37260/RCTD.V5I9.138",
+                "ISSN": "2413 -  7057",
+                "abstract": "RESUMEN Objetivo. Calcular el nivel de correlación entre una entidad conversacional de inteligencia artificial (conocido también como chatbot) con la calidad percibida del servicio de atención a los estudiantes de Ciencias Administrativas y Marketing Estratégico de la Universidad José Carlos Mariátegui Filial Tacna (CAME de la UJCM). Materiales y métodos. Investigación cuantitativa de diseño correlacional, la población estuvo compuesta por 62 estudiantes de ambos sexos, y una muestra de 54 estudiantes y un margen de error del 5%. Los instrumentos empleados fueron System Usability Scale (SUS), para medir la usabilidad de la entidad conversacional de inteligencia artificial; y Service Performance (SERVPERF), para la calidad del servicio percibido. Resultados. Existe una correlación significativa de 0,631 de nivel alto entre la entidad conversacional de inteligencia artificial (en adelante, IA) y la calidad del servicio percibido. Conclusiones. Entre las variables de la investigación se evidencia una correlación directa de 0,631, lo cual supone una correlación alta y, por tanto, mejorar o ampliar características de la entidad conversacional, y hacerlo más usable, potenciará la calidad del servicio que los estudiantes perciben. Palabras clave: entidad conversacional, inteligencia artificial, chatbot, servicio de atención. ABSTRACT Objective. Calculate the level of correlation between a conversational entity of artificial intelligence (also known as chatbot) with the perceived quality of service attention to students of Administrative Sciences and Strategic Marketing of the University José Carlos Mariátegui Subsidiary Tacna (hereinafter, CAME of the UJCM). Methodology. the type of research was quantitative; and, the design, correlational, having a population of sixty-two students of both sexes, whose sample was fifty-four students and a 5% margin error The instruments used were System Usability Scale (SUS), to measure the usability of the artificial intelligence conversational entity; and Service Performance (SERVPERF), for perceived service quality. Results. A significant correlation of 0.631 high level between the conversational entity of artificial intelligence (hereinafter, AI) and the perceived quality of service exists. Conclusion. A significant-direct correlation of 0.631 between the variables can be evidenced, which implies a high correlation and, therefore, to improve or expand the characteristics of the conversational entity, and make it more usabl…",
+                "author": [
+                    {
+                        "dropping-particle": "",
+                        "family": "Original",
+                        "given": "Artículo",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    },
+                    {
+                        "dropping-particle": "",
+                        "family": "Juan",
+                        "given": "Víctor",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    },
+                    {
+                        "dropping-particle": "",
+                        "family": "Flores",
+                        "given": "Jimenez",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    },
+                    {
+                        "dropping-particle": "",
+                        "family": "Juan",
+                        "given": "Oscar",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    },
+                    {
+                        "dropping-particle": "",
+                        "family": "Carlos",
+                        "given": "Juan",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    },
+                    {
+                        "dropping-particle": "",
+                        "family": "Ubaldo",
+                        "given": "Juan",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    },
+                    {
+                        "dropping-particle": "",
+                        "family": "Castilla",
+                        "given": "Jimenez",
+                        "non-dropping-particle": "",
+                        "parse-names": false,
+                        "suffix": ""
+                    }
+                ],
+                "container-title": "REVISTA CIENCIA Y TECNOLOGÍA - Para el Desarrollo - UJCM",
+                "id": "ITEM-1",
+                "issue": "9",
+                "issued": {
+                    "date-parts": [
+                        [
+                            "2019",
+                            "3",
+                            "6"
+                        ]
+                    ]
+                },
+                "number-of-pages": "19-26",
+                "title": "ENTIDAD CONVERSACIONAL DE INTELIGENCIA ARTIFICIAL Y CALIDAD PERCIBIDA DEL SERVICIO DE ATENCIÓN A LOS ESTUDIANTES DE LA UNIVERSIDAD JOSÉ CARLOS MARIÁTEGUI FILIAL TACNA, 2018-II CONVERSATIONAL ENTITY OF ARTIFICIAL INTELLIGENCE AND PERCEIVED QUALITY OF SERVICE OF ATTENTION TO STUDENTS OF THE JOSÉ CARLOS MARIÁTEGUI TACNA FILIAL UNIVERSITY, 2018-II",
+                "type": "report",
+                "volume": "5"
+            },
+            "uris": [
+                "http://www.mendeley.com/documents/?uuid=93023889-b8cb-3cdd-8827-cec446795ff5"
+            ]
+        }
+    ],
+    "mendeley": {
+        "formattedCitation": "(Original et al., 2019)",
+        "plainTextFormattedCitation": "(Original et al., 2019)",
+        "previouslyFormattedCitation": "(Original et al., 2019)"
+    },
+    "properties": {
+        "noteIndex": 0
+    },
+    "schema": "https://github.com/citation-style-language/schema/raw/master/csl-citation.json"
+}
